@@ -201,6 +201,45 @@
   const story = document.querySelector("[data-device-story]");
   const desktopMonitor = story && story.querySelector(".desktop-monitor");
   if (desktopMonitor) {
+    const monitorPlane = desktopMonitor.querySelector(".monitor-screen");
+    const projectDashboard = () => {
+      if (!monitorPlane) return;
+      const width = monitorPlane.offsetWidth;
+      const height = monitorPlane.offsetHeight;
+      if (!width || !height) return;
+
+      // Inner display corners measured from the generated monitor photograph.
+      const points = [
+        { x: 0.01119, y: 0.16986 },
+        { x: 0.97762, y: 0.01675 },
+        { x: 0.98741, y: 0.91148 },
+        { x: 0.00979, y: 0.97129 }
+      ];
+      const [p0, p1, p2, p3] = points;
+      const dx1 = p1.x - p2.x;
+      const dx2 = p3.x - p2.x;
+      const dx3 = p0.x - p1.x + p2.x - p3.x;
+      const dy1 = p1.y - p2.y;
+      const dy2 = p3.y - p2.y;
+      const dy3 = p0.y - p1.y + p2.y - p3.y;
+      const denominator = dx1 * dy2 - dx2 * dy1;
+      const g = (dx3 * dy2 - dx2 * dy3) / denominator;
+      const h = (dx1 * dy3 - dx3 * dy1) / denominator;
+      const a = p1.x - p0.x + g * p1.x;
+      const b = p3.x - p0.x + h * p3.x;
+      const c = p0.x;
+      const d = p1.y - p0.y + g * p1.y;
+      const e = p3.y - p0.y + h * p3.y;
+      const f = p0.y;
+      monitorPlane.style.transform = `matrix3d(${a},${d * height / width},0,${g / width},${b * width / height},${e},0,${h / height},0,0,1,0,${c * width},${f * height},0,1)`;
+    };
+    projectDashboard();
+    if ("ResizeObserver" in window && monitorPlane) {
+      const monitorResize = new ResizeObserver(projectDashboard);
+      monitorResize.observe(monitorPlane);
+    }
+    window.addEventListener("resize", projectDashboard);
+
     const revealMonitor = () => desktopMonitor.classList.add("is-visible");
     if (reduceMotion || !("IntersectionObserver" in window)) {
       revealMonitor();

@@ -2371,3 +2371,88 @@ body { color: var(--ink); }
 @media (max-width: 640px) {
   .hero-proof { margin-top: 16px; }
 }
+
+/* Photographic monitor scene with the dashboard projected onto its screen. */
+.sync-sticky {
+  background: #071426 url("assets/soundwell/monitor-table-scene.png") center / 100% 100% no-repeat;
+}
+.sync-sticky::before { content: none; animation: none; }
+.sync-heading {
+  top: 5%;
+  left: 68%;
+  right: 4%;
+  text-align: left;
+}
+.sync-heading h3 { font-size: clamp(25px, 2.8vw, 44px); line-height: 1.02; }
+.sync-summary { margin-left: 0; max-width: 390px; font-size: clamp(11px, .95vw, 15px); }
+.device-pair {
+  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: none;
+  perspective: none;
+}
+.desktop-monitor {
+  left: 10.65%;
+  top: 10.1%;
+  display: block;
+  width: 53.2%;
+  height: 55.6%;
+  opacity: 0;
+  transform: none;
+  filter: none;
+  transition: opacity .5s ease;
+}
+.desktop-monitor.is-visible { opacity: 1; }
+.monitor-screen {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  box-sizing: border-box;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  transform-origin: 0 0;
+}
+.monitor-screen .dashboard {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 2px;
+}
+.monitor-stand { display: none; }
+.comparison-handset-video {
+  top: 22%;
+  right: 5.5%;
+  height: 76%;
+  max-width: none;
+  max-height: none;
+  transform: translateY(calc((.5 - var(--story-progress)) * -12px));
+  filter: brightness(.92) saturate(.92) contrast(1.04) drop-shadow(0 24px 34px rgba(0, 4, 14, .5));
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+.sync-footer,
+.sync-line { display: none; }
+@media (max-width: 900px) {
+  .sync-heading { top: 5%; left: 67%; right: 4%; }
+  .sync-heading h3 { font-size: clamp(19px, 3.1vw, 29px); }
+  .sync-summary { max-width: 260px; font-size: clamp(9px, 1.35vw, 12px); }
+  .comparison-handset-video { top: 25%; right: 3%; height: 72%; }
+}
+@media (max-width: 640px) {
+  .sync-heading { top: 4%; left: 67%; right: 4%; padding: 0; }
+  .sync-heading .eyebrow { margin-bottom: 3px; font-size: 6px; }
+  .sync-heading h3 { font-size: 11px; line-height: 1.03; }
+  .sync-summary { display: none; }
+  .comparison-handset-video { top: 38%; right: 3%; height: 60%; }
+  .desktop-monitor { left: 10.65%; top: 10.1%; width: 53.2%; height: 55.6%; }
+  .monitor-screen .dashboard { grid-template-columns: 40px 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .comparison-handset-video { transform: none; }
+}
