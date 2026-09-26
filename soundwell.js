@@ -210,10 +210,10 @@
 
       // Inner display corners measured from the generated monitor photograph.
       const points = [
-        { x: 0.01119, y: 0.16986 },
-        { x: 0.97762, y: 0.01675 },
+        { x: 0.02238, y: 0.15837 },
+        { x: 0.98741, y: 0 },
         { x: 0.98741, y: 0.91148 },
-        { x: 0.00979, y: 0.97129 }
+        { x: 0, y: 0.97129 }
       ];
       const [p0, p1, p2, p3] = points;
       const dx1 = p1.x - p2.x;

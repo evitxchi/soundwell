@@ -2376,6 +2376,10 @@ body { color: var(--ink); }
 .sync-sticky {
   background: #071426 url("assets/soundwell/monitor-table-scene.png") center / 100% 100% no-repeat;
 }
+.sync-demo {
+  height: calc(100svh + 480px);
+  min-height: 0;
+}
 .sync-sticky::before { content: none; animation: none; }
 .sync-heading {
   top: 5%;
@@ -2445,14 +2449,33 @@ body { color: var(--ink); }
   .comparison-handset-video { top: 25%; right: 3%; height: 72%; }
 }
 @media (max-width: 640px) {
+  .sync-demo { height: calc(100svh + 340px); min-height: 0; }
   .sync-heading { top: 4%; left: 67%; right: 4%; padding: 0; }
   .sync-heading .eyebrow { margin-bottom: 3px; font-size: 6px; }
   .sync-heading h3 { font-size: 11px; line-height: 1.03; }
   .sync-summary { display: none; }
-  .comparison-handset-video { top: 38%; right: 3%; height: 60%; }
+.comparison-handset-video { top: 38%; right: 3%; height: 60%; }
   .desktop-monitor { left: 10.65%; top: 10.1%; width: 53.2%; height: 55.6%; }
   .monitor-screen .dashboard { grid-template-columns: 40px 1fr; }
 }
 @media (prefers-reduced-motion: reduce) {
   .comparison-handset-video { transform: none; }
+}
+
+/* Keep the photographed monitor and its screen projection on the same 16:9 canvas. */
+.sync-sticky {
+  width: min(calc(100vw - clamp(20px, 5vw, 72px)), 1600px, calc((100svh - 100px) * 1.7777778));
+  max-height: none;
+}
+@media (max-width: 900px) {
+  .sync-sticky {
+    width: min(100vw, calc((100svh - 90px) * 1.7777778));
+    max-height: none;
+  }
+}
+@media (max-width: 640px) {
+  .sync-sticky {
+    width: min(100vw, calc((100svh - 90px) * 1.7777778));
+    max-height: none;
+  }
 }
